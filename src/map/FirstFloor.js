@@ -1,8 +1,38 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useWindowDimensions} from "../hooks/useWindowDimensions";
 
-const FirstFloor = () => {
+
+const FirstFloor = ({selectedValue, isSelectedValueChanged}) => {
     const {height, width} = useWindowDimensions();
+
+    const [lastSelectedValue, setLastSelectedValue] = useState(null)
+
+    useEffect(()=> {
+        if (lastSelectedValue !== selectedValue) {
+            const paths = Array.from(document.getElementsByTagName('path'));
+            const foundPaths = paths.filter(path => path.getAttribute('data-id') === lastSelectedValue);
+            console.log(foundPaths);
+            foundPaths.forEach(path => {
+                path.style.fill = ''; // Example style: setting the fill color to blue
+                // You can add more style properties as needed
+            });
+        }
+        console.log("FIRST FLOOR", selectedValue)
+        if (selectedValue) {
+            const paths = Array.from(document.getElementsByTagName('path'));
+            const foundPaths = paths.filter(path => path.getAttribute('data-id') === selectedValue);
+            console.log(foundPaths);
+            foundPaths.forEach(path => {
+                path.style.fill = '#62cf6b'; // Example style: setting the fill color to blue
+                // You can add more style properties as needed
+            });
+            setLastSelectedValue(selectedValue)
+        }
+        if (isSelectedValueChanged) {
+
+        }
+    })
+
     return (
         <div>
             <svg width={width} height={height} viewBox="0 0 2000 1024" fill="none"
@@ -10,11 +40,7 @@ const FirstFloor = () => {
                 <g clip-path="url(#clip0_103_2)">
                     <rect width="2000" height="1024" fill="white"/>
                     <rect x="930.5" y="0.5" width="139" height="570" fill="#D5D5D5" stroke="black"/>
-                    <g id="1" style={{
-                        backgroundColor:"red"
-                    }}>
-                    <path d="M38 84H60V1H2V84H22" stroke="black"/>
-                    </g>
+                    <path style={{fill:"#62cf6b"}} d="M38 84H60V1H2V84H22" stroke="black"/>
                     <path d="M386 84H408V1H350V84H370" stroke="black"/>
                     <path d="M154 84H176V1H118V84H138" stroke="black"/>
                     <path d="M502 84H524V1H466V84H486" stroke="black"/>
@@ -85,7 +111,7 @@ const FirstFloor = () => {
                     <path d="M488 692H466V775H524V692H504" stroke="black"/>
                     <path d="M140 692H118V775H176V692H156" stroke="black"/>
                     <path d="M372 692H350V775H408V692H388" stroke="black"/>
-                    <path d="M24 692H2L2 775H60L60 692H40" stroke="black"/>
+                    <path data-id={'daneker'} d="M24 692H2L2 775H60L60 692H40" stroke="black"/>
                     <path d="M662 443H640V526H698V443H678" stroke="black"/>
                     <path d="M314 443H292V526H350V443H330" stroke="black"/>
                     <path d="M546 443H524V526H582V443H562" stroke="black"/>

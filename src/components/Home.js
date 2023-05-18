@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useWindowDimensions } from "../hooks/useWindowDimensions";
+import ReactSelect from "./ReactSelect";
 
 const Home = () => {
     const { width } = useWindowDimensions();
@@ -130,6 +131,43 @@ const Home = () => {
         },
         [isKeyboardTyping, search, selectedBlockOption, selectedFloorOption]);
 
+
+    // АЯН НАПИСАЛ
+
+    const [selectedValue, setSelectedValue] = useState(null)
+
+    function onSetSelectedValue(value) {
+        setSelectedValue(value)
+    }
+
+    useEffect(()=> {
+        console.log('HOME SELECTED VALUE', selectedValue)
+    }, [selectedValue])
+
+    const firstFloorSelectOptions = [
+        {name: 'Обувной бутик', id: 'daneker'},
+        {name: 'Мясной бутик', id: 'daneker2'},
+        {name: 'Мужской бутик', id: 'daneker3'},
+        {name: 'Женский бутик', id: 'daneker4'},
+    ]
+    const secondFloorSelectOptions = [
+        {name: '2Обувной бутик', id: '2daneker'},
+        {name: '2Мясной бутик', id: '2daneker2'},
+        {name: '2Мужской бутик', id: '2daneker3'},
+        {name: '2Женский бутик', id: '2daneker4'},
+    ]
+
+    const [reactSelectOptions, setReactSelectOptions] = useState(firstFloorSelectOptions)
+
+    useEffect(()=> {
+        if (selectedFloorOption === 'first') {
+            setReactSelectOptions(firstFloorSelectOptions)
+        } else if (selectedFloorOption === 'second') {
+            setReactSelectOptions(secondFloorSelectOptions)
+        } else {
+            // создать thirdFloorSelectOptions = []
+        }
+    }, [selectedFloorOption])
     return (
         <>
             <Box>
@@ -198,26 +236,12 @@ const Home = () => {
                             Одежда
                         </option>
                     </Select>
-                    <InputGroup w={"290px"}>
-                        <Input
-                            borderEndRadius={9}
-                            borderStartRadius={0}
-                            bg={colorBgInput}
-                            color={colorInput}
-                            type="text"
-                            width="auto"
-                            placeholder="Номер бутика"
-                            _placeholder={{ color: colorInputPlaceholder }}
-                            value={search}
-                            onChange={(e) => {
-                                handleSearchInput(e);
-                            }}
-                        />
-                        <InputRightElement children={<SearchIcon color={colorInput} />} />
-                    </InputGroup>
+                    <ReactSelect options={reactSelectOptions} onSetOptions={onSetSelectedValue} />
                 </Flex>
+
                 <Sidebar />
-                    <Show selectedFloorBlockOption={selectedFloorOption}/>
+
+                <Show selectedValue={selectedValue} selectedFloorBlockOption={selectedFloorOption}/>
             </Box>
         </>
     );

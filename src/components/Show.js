@@ -3,15 +3,16 @@ import FirstFloor from "../map/FirstFloor";
 import SecondFloor from "../map/SecondFloor";
 import ThirdFloor from "../map/ThirdFloor";
 
-const Show = ({ selectedFloorBlockOption }) => {
+const Show = ({ selectedValue, selectedFloorBlockOption }) => {
     console.log(selectedFloorBlockOption)
+    console.log('SELECTED VALUE', selectedValue)
     switch (selectedFloorBlockOption) {
         case "second":
             return <SecondFloor/>;
         case "third" :
             return <ThirdFloor/>
         default :
-            return <FirstFloor/>
+            return <FirstFloor selectedValue={selectedValue}/>
     }
 };
 

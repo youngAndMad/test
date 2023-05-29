@@ -29,9 +29,7 @@ const Home = () => {
     const colorBgFloorOption = useColorModeValue("#242a36", "#edf2f7");
     const colorTextFloorOption = useColorModeValue("#edf2f7", "#242a36");
     const colorTextCurrentFloorOption = useColorModeValue("#242a36", "#edf2f7");
-    const colorInput = useColorModeValue("#edf2f7", "#242a36");
-    const colorBgInput = useColorModeValue("#242a36", "#edf2f7");
-    const colorInputPlaceholder = useColorModeValue("#edf2f7", "#242a366a");
+
     const floorOptionData = [
         {id: 3, name: "third",},
         {id: 2, name: "second",},
@@ -43,9 +41,6 @@ const Home = () => {
         setSelectedFloorOption(option);
     };
 
-    const handleSearchInput = e => setSearch(e.target.value);
-
-
     const handleFloorOptionClick = (e) => {
         let name = e.target.name;
         if (name !== selectedFloorOption) {
@@ -55,85 +50,6 @@ const Home = () => {
     };
 
     const handleBlockOptionChange = e => setSelectedBlockOption(e.target.value);
-
-
-    useEffect(string => {
-            const handleKeyboardTyping = () => {
-                console.log(search)
-                console.log(/^\d+$/.test(search))
-                setIsKeyboardTyping(/^\d+$/.test(search));
-            };
-
-            const handleFloor = () => {
-
-            };
-
-            const withoutKeyboardTyping = () => {
-                handleFloor();
-                let blockOptionValue = selectedBlockOption === "" ? "" : selectedBlockOption + ".";
-                let activity = search ? blockOptionValue + search.toUpperCase() : search.toUpperCase();
-                const groups = document.querySelectorAll(`[data-name*="${activity}"]`);
-
-                if (groups.length > 0)
-                    groups.forEach(group => group.classList.add("room-map-group-search-target"));
-
-
-                const groupsToRemove = document.querySelectorAll(
-                    `[data-name]:not([data-name*="${activity}"])`
-                );
-
-                if (groupsToRemove.length > 0)
-                    groupsToRemove.forEach(group => group.classList.remove("room-map-group-search-target"));
-
-            };
-
-            const withKeyboardTyping = (s) => {
-                try {
-                    let input = Number(search);
-                    if (input > 216 && input < 432){
-                        setSelectedFloorOption("second")
-                    }else if (input > 432 && input < 638){
-                        setSelectedFloorOption("third")
-                    }else {
-                        setSelectedFloorOption("first")
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
-
-                const groups = document.querySelectorAll(
-                    `[data-name*="${search.toUpperCase()}"]`
-                );
-
-                if (groups.length > 0) {
-                    groups.forEach((group) => {
-                        group.classList.add("room-map-group-search-target");
-                    });
-                }
-
-                const groupsToRemove = document.querySelectorAll(
-                    `[data-name]:not([data-name*="${search.toUpperCase()}"])`
-                );
-
-                if (groupsToRemove.length > 0) {
-                    groupsToRemove.forEach((group) => {
-                        group.classList.remove("room-map-group-search-target");
-                    });
-                }
-            };
-
-            const handleSearch = () => {
-                handleKeyboardTyping();
-                isKeyboardTyping ? withKeyboardTyping(search) : withoutKeyboardTyping();
-            };
-
-            handleSearch();
-        },
-        [isKeyboardTyping, search, selectedBlockOption, selectedFloorOption]);
-
-
-    // АЯН НАПИСАЛ
-
     const [selectedValue, setSelectedValue] = useState(null)
 
     function onSetSelectedValue(value) {
@@ -150,12 +66,6 @@ const Home = () => {
         {name: 'Мужской бутик', id: 'daneker3'},
         {name: 'Женский бутик', id: 'daneker4'},
     ]
-    const secondFloorSelectOptions = [
-        {name: '2Обувной бутик', id: '2daneker'},
-        {name: '2Мясной бутик', id: '2daneker2'},
-        {name: '2Мужской бутик', id: '2daneker3'},
-        {name: '2Женский бутик', id: '2daneker4'},
-    ]
 
     const [reactSelectOptions, setReactSelectOptions] = useState(firstFloorSelectOptions)
 
@@ -163,7 +73,7 @@ const Home = () => {
         if (selectedFloorOption === 'first') {
             setReactSelectOptions(firstFloorSelectOptions)
         } else if (selectedFloorOption === 'second') {
-            setReactSelectOptions(secondFloorSelectOptions)
+            // создать secondFloorSelectOptions = []
         } else {
             // создать thirdFloorSelectOptions = []
         }
@@ -222,7 +132,7 @@ const Home = () => {
                         onChange={handleBlockOptionChange}
                         borderEndRadius={0}
                         borderStartRadius={9}
-                        width="auto">
+                            width="auto">
                         <option style={{ color: colorBgSelect }} value="#">
                             Спортивные товары
                         </option>

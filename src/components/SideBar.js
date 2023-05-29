@@ -70,7 +70,7 @@ const Sidebar = () => {
                                 </Button>
                             </ListItem>
                             <ListItem>
-                                <Link href="https://github.com/Yuujiso/aitumap">
+                                <Link href="#">
                                     <Button boxShadow={"lg"} w="100%">
                                         <Text size="sm">Товары</Text>
                                     </Button>

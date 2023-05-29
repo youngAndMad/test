@@ -41,7 +41,7 @@ export default function ReactSelect({options, onSetOptions=f=>f}) {
     const [selectOptions, setSelectOptions] = useState([]);
     useEffect(()=>{
         const o = options.map(obj => ({label: obj.name, value: obj.id,}));
-        console.log({options, cityOptions: o});
+        console.log({options, option: o});
         setSelectOptions(o);
     },[options])
 
@@ -56,9 +56,9 @@ export default function ReactSelect({options, onSetOptions=f=>f}) {
         console.log(selectOption)
     }, [selectOption])
 
-    return (<div style={{width: '250px', backgroundColor: 'white'}}>
+    return (<div style={{width: '250px', backgroundColor: 'white' , color:'black'}}>
         <Select
-            placeholder={'Введите город'}
+            placeholder={'Поиск'}
             options={selectOptions}
             styles={{
                 control: (baseStyles, state) => ({
@@ -68,7 +68,6 @@ export default function ReactSelect({options, onSetOptions=f=>f}) {
                     borderRadius: '0 10px 10px 0',
                     padding: '0 4px',
                     fontSize: '14px',
-                    color: '#a3a1a1',
                     marginBottom: '10px',
                 }),
                 clearIndicator: (base) => ({
@@ -77,9 +76,7 @@ export default function ReactSelect({options, onSetOptions=f=>f}) {
                     right: 0,
                 }),
             }}
-            name={'city'}
             components={{
-                // …
                 DropdownIndicator,
                 IndicatorSeparator: () => null,
             }}

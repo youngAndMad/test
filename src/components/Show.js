@@ -8,9 +8,9 @@ const Show = ({ selectedValue, selectedFloorBlockOption }) => {
     console.log('SELECTED VALUE', selectedValue)
     switch (selectedFloorBlockOption) {
         case "second":
-            return <SecondFloor/>;
+            return <SecondFloor selectedValue={selectedValue}/>;
         case "third" :
-            return <ThirdFloor/>
+            return <ThirdFloor selectedValue={selectedValue}/>
         default :
             return <FirstFloor selectedValue={selectedValue}/>
     }

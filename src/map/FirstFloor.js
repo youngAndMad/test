@@ -47,7 +47,7 @@ const FirstFloor = ({ selectedValue, isSelectedValueChanged }) => {
                     <path data-id='daneker' d="M96 84H118V1H60V84H80" stroke="black" />
                     <path d="M444 84H466V1H408V84H428" stroke="black" />
                     <path d="M212 84H234V1H176V84H196" stroke="black" />
-                    <path data-id='daneker2' onClick={alert('hello world')} d="M560 84H582V1H524V84H544" stroke="black" />
+                    <path data-id='daneker2' d="M560 84H582V1H524V84H544" stroke="black" />
                     <path data-id='daneker3' d="M328 84H350V1H292V84H312" stroke="black" />
                     <path data-id='daneker4' d="M676 84H698V1H640V84H660" stroke="black" />
                     <path d="M38 858H60V775H2V858H22" stroke="black" />
